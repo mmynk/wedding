@@ -1,0 +1,166 @@
+import { useState, useEffect } from 'react';
+import { MapPin, Clock, Heart } from 'lucide-react';
+
+const WeddingWebsite = () => {
+  const [videoEnded, setVideoEnded] = useState(false);
+  const [visibleSections, setVisibleSections] = useState({
+    details: false,
+    rsvp: false,
+    registry: false
+  });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = {
+        details: document.getElementById('details'),
+        rsvp: document.getElementById('rsvp'),
+        registry: document.getElementById('registry')
+      };
+
+      Object.entries(sections).forEach(([key, section]) => {
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight * 0.75;
+          setVisibleSections(prev => ({ ...prev, [key]: isVisible }));
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleVideoEnd = () => {
+    setVideoEnded(true);
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
+  };
+
+  return (
+    <div className="min-h-screen bg-pink-50">
+      {/* Video Intro Section */}
+      {!videoEnded && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <video
+            className="absolute w-full h-full object-cover bg-black opacity-80"
+            autoPlay
+            muted
+            onEnded={handleVideoEnd}
+          >
+            <source src="/wedding-invite.MP4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      )}
+
+      {/* Hero Section */}
+      <div className="relative h-screen bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 flex items-center justify-center text-center overflow-hidden">
+        <div className="absolute inset-0 bg-black opacity-40"></div> {/* Dark overlay */}
+        <div className="relative z-10 text-white px-4 py-20">
+          <h1 className="text-5xl font-bold mb-4 leading-tight">Reethika & Mohit</h1>
+          <p className="text-2xl">... are getting married!</p>
+          <p className="text-3xl mt-4 font-semibold">March 9, 2025</p>
+          <div className="mt-8 animate-bounce">
+            <p className="text-lg">Scroll to explore</p>
+            <div className="w-6 h-6 mx-auto border-b-2 border-r-2 border-white rotate-45 mt-2"></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Details Section */}
+      <section
+        id="details"
+        className={`py-20 transition-all duration-1000 transform ${
+          visibleSections.details ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12 text-purple-600">Wedding Details</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border-t-4 border-pink-400">
+              <div className="flex items-center mb-4">
+                <MapPin className="w-6 h-6 text-pink-500 mr-2" />
+                <h3 className="text-xl font-semibold text-pink-600">Venue</h3>
+              </div>
+              <p className="text-gray-600">
+                Silver Oak Tropical Resort<br />
+                Warikh Aali, Nagaon<br />
+                Uran, Navi Mumbai, Maharashtra 400702
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border-t-4 border-blue-400">
+              <div className="flex items-center mb-4">
+                <Clock className="w-6 h-6 text-blue-500 mr-2" />
+                <h3 className="text-xl font-semibold text-blue-600">Timeline</h3>
+              </div>
+              <p className="text-gray-600">
+                Haldi: March 8th, 11:00 AM<br />
+                Sangeet: March 8th, 7:00 PM<br />
+                Wedding: March 9th, 7:00 AM<br />
+                Reception: March 9th, 7:00 PM
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* RSVP Section */}
+      <section
+        id="rsvp"
+        className={`py-20 transition-all duration-1000 transform ${
+          visibleSections.rsvp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12 text-blue-600">RSVP</h2>
+          <div className="bg-white p-8 rounded-lg shadow-md">
+            <iframe
+              src="https://docs.google.com/forms/d/e/1FAIpQLSe1S6Arjf3fTeNr0Ah1cuNXpWXOIJcYwnU5-E_sZBP7NoU4oQ/viewform?embedded=true"
+              className="w-full h-[975px] border-0"
+              title="RSVP Form"
+            >
+              Loading…
+            </iframe>
+          </div>
+        </div>
+      </section>
+
+      {/* Registry Section */}
+      <section
+        id="registry"
+        className={`py-20 transition-all duration-1000 transform ${
+          visibleSections.registry ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+      >
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12 text-pink-600">Registry</h2>
+          <div className="text-center">
+            <p className="text-gray-600 mb-6">
+              We're registered at the following stores:
+            </p>
+            <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+              <button className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg hover:bg-pink-50 transition-all duration-300 border-2 border-pink-200">
+                Registry 1
+              </button>
+              <button className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg hover:bg-blue-50 transition-all duration-300 border-2 border-blue-200">
+                Registry 2
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 text-white py-8">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <Heart className="w-8 h-8 mx-auto mb-4 animate-pulse text-pink-200" />
+          <p className="text-xl">We can't wait to celebrate with you!</p>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default WeddingWebsite;
