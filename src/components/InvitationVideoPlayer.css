@@ -1,0 +1,35 @@
+.tv-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* The max width for your container */
+  aspect-ratio: 16 / 9; /* Match the TV frame aspect ratio */
+  margin: 0 auto;
+}
+
+.tv-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 1; /* Ensure frame stays above the video */
+  pointer-events: none; /* Prevent interaction with the frame */
+}
+
+.video-wrapper {
+  position: absolute;
+  top: 48%; /* Adjust based on the TV screen cutout */
+  left: 20%; /* Horizontally center video inside the TV screen */
+  width: 76%; /* Width of the screen relative to TV */
+  height: 66%; /* Matches the aspect ratio of the TV screen */
+  overflow: hidden;
+  z-index: 2; /* Keep video below the TV frame */
+}
+
+.video {
+  width: 68%;
+  height: 94%;
+  object-fit: cover; /* Scales the video without distortion */
+  z-index: 1;
+  border-radius: 3em;
+}

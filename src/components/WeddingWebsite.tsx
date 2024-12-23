@@ -2,7 +2,7 @@ import ElegantRSVPForm from './ElegantRSVPForm';
 import InvitationVideoPlayer from './InvitationVideoPlayer';
 
 const TexturePattern = () => (
-  <svg className="absolute inset-0 w-full h-full opacity-10" width="100%" height="100%">
+  <svg className="absolute inset-0 w-full h-full opacity-10 z-[-1]" width="100%" height="100%">
     <filter id='noiseFilter'>
       <feTurbulence
         type='fractalNoise'
@@ -38,7 +38,7 @@ const Navigation = () => (
     <div className="max-w-6xl mx-auto px-4">
       <div className="flex justify-center items-center h-16">
         <div className="space-x-8 text-gray-700">
-          {['Home', 'Details', 'Our Story', 'RSVP'].map((item) => (
+          {['Home', 'Details', 'RSVP', 'Invitation'].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase().replace(' ', '-')}`}
@@ -148,23 +148,21 @@ const Details = ({ weddingDetails = {
 
 const WeddingWebsite = () => {
   return (
-    // <div className="font-cormorant">
     <div className="relative min-h-screen bg-[#faf7f2] font-cormorant">
-      {/* Background texture for entire page */}
+      {/* Apply background pattern to the entire screen */}
       <TexturePattern />
 
-      {/* Content */}
-      <div className="relative">
+      <div className="relative z-10">
+        {/* Content */}
         <Navigation />
-        {/* <SectionDivider /> */}
         <Hero />
         <SectionDivider />
         <Details />
         <SectionDivider />
-        <ElegantRSVPForm />
-        <SectionDivider />
         <InvitationVideoPlayer />
-        {/* Other sections */}
+        <br/><br/><br/><br/><br/><br/><br/>
+        <SectionDivider />
+        <ElegantRSVPForm />
       </div>
     </div>
   );
