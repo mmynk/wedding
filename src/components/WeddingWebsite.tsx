@@ -55,7 +55,7 @@ const Navigation = () => (
 const Hero = ({ couple = { partner1: 'Reethika', partner2: 'Mohit' } }) => (
   <section id="home" className="relative pt-16 h-[80vh]">
     <img
-      src="/reemo.png"
+      src="./reemo.png"
       alt="Wedding Hero"
       className="w-full h-full object-cover"
     />
