@@ -1,23 +1,62 @@
 import { useState } from 'react';
+import { submitToGoogleForm } from '../utils/submitGoogleForm';
+
+interface FormData {
+  name: string;
+  email: string;
+  guests: string;
+  attending: string;
+  notes: string;
+}
+
+interface SubmitStatus {
+  type: 'success' | 'error' | '';
+  message: string;
+}
 
 const ElegantRSVPForm = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     guests: '1',
     attending: '',
-    mealPreference: '',
     notes: ''
   });
 
   const [focusedInput, setFocusedInput] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>({ type: '', message: '' });
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    setSubmitStatus({ type: '', message: '' });
+
+    try {
+      await submitToGoogleForm(formData);
+      setSubmitStatus({
+        type: 'success',
+        message: 'Thank you for your RSVP!'
+      });
+      setFormData({
+        name: '',
+        email: '',
+        guests: '1',
+        attending: '',
+        notes: ''
+      });
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'There was an error submitting your RSVP. Please try again.'
+      });
+      console.error('Form submission error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -45,6 +84,14 @@ const ElegantRSVPForm = () => {
           <h2 className="font-playfair text-4xl mb-4">RSVP</h2>
           <p className="text-gray-600">We look forward to celebrating with you</p>
         </div>
+
+        {submitStatus.message && (
+          <div className={`mb-6 p-4 rounded-lg text-center ${
+            submitStatus.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+          }`}>
+            {submitStatus.message}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Name Input */}
@@ -169,13 +216,15 @@ const ElegantRSVPForm = () => {
 
           {/* Submit Button */}
           <button
-            type="submit"
-            className="w-full bg-gray-800 text-white py-4 rounded-full text-lg
-              hover:bg-gray-700 transition-colors duration-300 mt-8
-              transform hover:scale-[1.02] active:scale-[0.98] transition-transform"
-          >
-            Send RSVP
-          </button>
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full bg-gray-800 text-white py-4 rounded-full text-lg
+            hover:bg-gray-700 transition-colors duration-300 mt-8
+            transform hover:scale-[1.02] active:scale-[0.98] transition-transform
+            disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isSubmitting ? 'Sending...' : 'Send RSVP'}
+        </button>
         </form>
       </div>
     </section>
