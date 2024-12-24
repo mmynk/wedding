@@ -20,10 +20,11 @@
   position: absolute;
   top: 48%; /* Adjust based on the TV screen cutout */
   left: 20%; /* Horizontally center video inside the TV screen */
-  width: 76%; /* Width of the screen relative to TV */
-  height: 66%; /* Matches the aspect ratio of the TV screen */
+  width: 52%; /* Width of the screen relative to TV */
+  height: 63%; /* Matches the aspect ratio of the TV screen */
   overflow: hidden;
   z-index: 2; /* Keep video below the TV frame */
+  border-radius: 2em;
 }
 
 .video {
@@ -31,5 +32,89 @@
   height: 94%;
   object-fit: cover; /* Scales the video without distortion */
   z-index: 1;
-  border-radius: 3em;
+}
+
+.play-button-wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease;
+}
+
+.play-button-wrapper:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.play-button {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ff5a5f, #e63946); /* Red hues */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(255, 117, 140, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.play-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 15px rgba(230, 57, 70, 0.8); /* More intense red */
+}
+
+.play-icon {
+  width: 36px;
+  height: 36px;
+  fill: white;
+  z-index: 2;
+}
+
+.ripple {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(230, 57, 70, 0.4), transparent); /* Reddish ripple */
+  animation: ripple-animation 1.5s infinite;
+  z-index: 1;
+}
+
+@keyframes ripple-animation {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.video-wrapper:hover .play-button {
+  transform: scale(1.1);
+}
+
+/* Modal styles */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 50;
+}
+
+.close-button {
+  padding: 0.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease;
+}
+
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
