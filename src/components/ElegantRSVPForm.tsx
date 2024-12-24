@@ -131,7 +131,7 @@ const ElegantRSVPForm = () => {
                   type="radio"
                   id="attending-yes"
                   name="attending"
-                  value="yes"
+                  value="Yes"
                   onChange={handleChange}
                   className={radioClasses}
                 />
@@ -144,7 +144,7 @@ const ElegantRSVPForm = () => {
                   type="radio"
                   id="attending-no"
                   name="attending"
-                  value="no"
+                  value="No"
                   onChange={handleChange}
                   className={radioClasses}
                 />
