@@ -38,7 +38,12 @@ const Navigation = () => (
     <div className="max-w-6xl mx-auto px-4">
       <div className="flex justify-center items-center h-16">
         <div className="space-x-8 text-gray-700">
-          {['Home', 'Details', 'RSVP', 'Invitation'].map((item) => (
+          {[
+            'Home',
+            'Details',
+            'RSVP',
+            'Invitation',
+          ].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase().replace(' ', '-')}`}
@@ -159,10 +164,10 @@ const WeddingWebsite = () => {
         <SectionDivider />
         <Details />
         <SectionDivider />
-        <InvitationVideoPlayer />
-        <br/><br/><br/><br/><br/><br/><br/>
-        <SectionDivider />
         <ElegantRSVPForm />
+        <SectionDivider />
+        <InvitationVideoPlayer />
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
       </div>
     </div>
   );
