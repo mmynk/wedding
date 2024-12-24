@@ -41,8 +41,8 @@ const Navigation = () => (
           {[
             'Home',
             'Details',
-            'RSVP',
             'Invitation',
+            'RSVP',
           ].map((item) => (
             <a
               key={item}
@@ -164,10 +164,10 @@ const WeddingWebsite = () => {
         <SectionDivider />
         <Details />
         <SectionDivider />
-        <ElegantRSVPForm />
-        <SectionDivider />
         <InvitationVideoPlayer />
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/>
+        <SectionDivider />
+        <ElegantRSVPForm />
       </div>
     </div>
   );
