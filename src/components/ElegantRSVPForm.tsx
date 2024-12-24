@@ -125,8 +125,8 @@ const ElegantRSVPForm = () => {
           {/* Attendance Radio Buttons */}
           <div className="space-y-4">
             <p className="text-gray-600 mb-4">Will you be joining us?</p>
-            <div className="flex gap-4 flex-wrap">
-              <div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="w-full sm:w-auto">
                 <input
                   type="radio"
                   id="attending-yes"
@@ -135,11 +135,11 @@ const ElegantRSVPForm = () => {
                   onChange={handleChange}
                   className={radioClasses}
                 />
-                <label htmlFor="attending-yes" className={radioLabelClasses}>
+                <label htmlFor="attending-yes" className={`${radioLabelClasses} block w-full text-center`}>
                   Joyfully Accept
                 </label>
               </div>
-              <div>
+              <div className="w-full sm:w-auto">
                 <input
                   type="radio"
                   id="attending-no"
@@ -148,7 +148,7 @@ const ElegantRSVPForm = () => {
                   onChange={handleChange}
                   className={radioClasses}
                 />
-                <label htmlFor="attending-no" className={radioLabelClasses}>
+                <label htmlFor="attending-no" className={`${radioLabelClasses} block w-full text-center`}>
                   Regretfully Decline
                 </label>
               </div>
