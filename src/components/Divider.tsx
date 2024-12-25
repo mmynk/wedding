@@ -16,7 +16,7 @@ export const SectionDivider: React.FC<SectionDividerProps> = ({ index }) => {
   const [countdown, setCountdown] = useState("");
 
   useEffect(() => {
-    const targetDate = new Date("2025-03-09T01:30:00Z").getTime();
+    const targetDate = new Date("2025-03-09T07:00:00+05:30").getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();
