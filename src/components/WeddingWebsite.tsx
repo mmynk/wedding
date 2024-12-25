@@ -132,16 +132,18 @@ const WeddingWebsite = () => {
       <div className="relative z-10">
         {/* Content */}
         <Navigation />
-        <Hero />
-        <SectionDivider index={0} /><br/><br/><br/>
-        <Details />
-        <SectionDivider index={1} /><br/><br/><br/>
-        <WardrobeCarousel />
-        <SectionDivider index={2}/><br/><br/><br/>
-        <InvitationVideoPlayer />
-        <br/><br/><br/><br/><br/><br/>
-        <SectionDivider index={3}/>
-        <ElegantRSVPForm />
+        <div className="space-y-12">
+          <Hero />
+          <SectionDivider index={0} />
+          <Details />
+          <SectionDivider index={1} />
+          <WardrobeCarousel />
+          <SectionDivider index={2}/>
+          <InvitationVideoPlayer />
+          <br/><br/><br/><br/><br/><br/>
+          <SectionDivider index={3}/>
+          <ElegantRSVPForm />
+        </div>
       </div>
     </div>
   );
