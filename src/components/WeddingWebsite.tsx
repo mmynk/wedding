@@ -1,21 +1,8 @@
 import ElegantRSVPForm from './ElegantRSVPForm';
 import InvitationVideoPlayer from './InvitationVideoPlayer';
+import SectionDivider from './Divider';
 import { TexturePattern } from './TexturePattern';
 import WardrobeCarousel from './Wardrobe';
-
-const SectionDivider = () => (
-  <div className="relative py-8">
-    <div className="flex items-center justify-center">
-      <div className="h-px w-16 bg-gray-300/50"></div>
-      <div className="mx-4">
-        <svg className="w-8 h-8 text-gray-400/50" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 3L14.5 8.5L20 9.3L16 13.4L17 19L12 16.3L7 19L8 13.4L4 9.3L9.5 8.5L12 3Z"/>
-        </svg>
-      </div>
-      <div className="h-px w-16 bg-gray-300/50"></div>
-    </div>
-  </div>
-);
 
 const Navigation = () => (
   <nav className="fixed w-full bg-white bg-opacity-95 shadow-sm z-50">
@@ -146,14 +133,14 @@ const WeddingWebsite = () => {
         {/* Content */}
         <Navigation />
         <Hero />
-        <SectionDivider />
+        <SectionDivider index={0} /><br/><br/><br/>
         <Details />
-        <SectionDivider />
+        <SectionDivider index={1} /><br/><br/><br/>
         <WardrobeCarousel />
-        <SectionDivider />
+        <SectionDivider index={2}/><br/><br/><br/>
         <InvitationVideoPlayer />
         <br/><br/><br/><br/><br/><br/>
-        <SectionDivider />
+        <SectionDivider index={3}/>
         <ElegantRSVPForm />
       </div>
     </div>
