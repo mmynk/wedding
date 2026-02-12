@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Lock files (using bun.lock)
+package-lock.json
+yarn.lock
+
+# Claude Code
+.claude/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
