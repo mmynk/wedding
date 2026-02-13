@@ -95,7 +95,7 @@ const ValentinePage = () => {
     8: { text: "Grr... now you've asked for it." },
     9: { text: "You seem to be immune to\nmy romantic persuasion." },
     10: { text: "Time for Plan B.\nClick Yes. You know you want to." },
-    11: { text: "Mwahahaha! Now let's see\nyou click No! LOSER!", buttonState: 'no-tiny' },
+    11: { text: "Mwahahaha! Now let's see\nyou click No! LOSER!", buttonState: 'yes-huge' },
     12: { text: "...this displeases me.", buttonState: 'default' },
     13: { text: "HA! I have replaced the No button\nwith this tiny speck. Now what are you\ngoing to do?", buttonState: 'no-tiny' },
     14: { text: "...I hate you.", buttonState: 'default' },
@@ -372,8 +372,8 @@ const ValentinePage = () => {
 
   // Render buttons based on state
   const renderButtons = () => {
-    const baseYesClasses = "font-cormorant font-bold text-white bg-red-500 hover:bg-red-600 rounded-full shadow-lg transition-all duration-300 hover:scale-105";
-    const baseNoClasses = "font-cormorant font-bold text-white rounded-full shadow-lg transition-all duration-300";
+    const baseYesClasses = "font-sans font-bold text-white bg-red-500 hover:bg-red-600 rounded-full shadow-lg transition-all duration-300 hover:scale-105";
+    const baseNoClasses = "font-sans text-white rounded-full shadow-lg transition-all duration-300";
 
     switch (buttonState) {
       case 'no-tiny':
@@ -410,7 +410,7 @@ const ValentinePage = () => {
               Yes!
             </button>
             <button onClick={handleNoClick} className={`${baseNoClasses} bg-gray-400 hover:bg-gray-500 px-8 py-4 text-2xl`}>
-              No
+              Yes!
             </button>
           </div>
         );
