@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import HeartShower from './HeartShower';
+import RingShower from './RingShower';
 import { Heart } from 'lucide-react';
 
 type ButtonState =
@@ -35,6 +36,7 @@ const ValentinePage = () => {
   const [buttonState, setButtonState] = useState<ButtonState>('default');
   const [noButtonPosition, setNoButtonPosition] = useState({ x: 0, y: 0 });
   const [showHearts, setShowHearts] = useState(false);
+  const [showRings, setShowRings] = useState(false);
   const [showExplosion, setShowExplosion] = useState(false);
   const [gameOver, setGameOver] = useState(false);
 
@@ -298,7 +300,17 @@ const ValentinePage = () => {
 
   const handleYesClick = () => {
     setGameOver(true);
-    setShowHearts(true);
+    if (clickCount >= 209) {
+      // Ultimate ending: hearts + rings
+      setShowHearts(true);
+      setShowRings(true);
+    } else if (clickCount >= 200) {
+      // Ring reward for persistence
+      setShowRings(true);
+    } else {
+      // Normal ending: hearts
+      setShowHearts(true);
+    }
   };
 
   // Separate handler for just moving the button (doesn't advance message)
@@ -340,6 +352,7 @@ const ValentinePage = () => {
     return (
       <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-pink-50 to-rose-100">
         {showHearts && <HeartShower onComplete={() => setShowHearts(false)} />}
+        {showRings && <RingShower onComplete={() => setShowRings(false)} />}
         <div className="relative z-10 text-center px-4">
           <h1 className="font-playfair text-6xl md:text-8xl text-gray-800 mb-6 animate-pulse">
             Finally.
@@ -347,11 +360,11 @@ const ValentinePage = () => {
           <p className="font-cormorant text-2xl md:text-3xl text-gray-600">
             Took you long enough. 💕
           </p>
-          <p className="font-cormorant text-lg text-gray-500 mt-4">
+          <p className="font-cormorant text-lg text-gray-500 mt-4 whitespace-pre-line">
             {clickCount < 5
               ? `(${clickCount} ${clickCount === 1 ? 'click' : 'clicks'}? Desperate much? 😏)`
               : clickCount >= 209
-              ? "Achievement unlocked: World's Most Stubborn Valentine 🏆. You're impossible. Good thing I already locked this down. 💍"
+              ? "Achievement unlocked: World's Most Stubborn Valentine 🏆.\nYou're impossible. Good thing I already locked this down. 💍"
               : clickCount >= 200
               ? "Okay fine, you earned this: 💍 (It's the same ring. I'm not made of money.)"
               : `(${clickCount} clicks. Could've been worse.)`}
