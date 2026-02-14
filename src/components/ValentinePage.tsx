@@ -39,6 +39,7 @@ const ValentinePage = () => {
   const [showRings, setShowRings] = useState(false);
   const [showExplosion, setShowExplosion] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [colorMismatchQuip, setColorMismatchQuip] = useState<string | null>(null);
 
   // Initialize message on mount
   useEffect(() => {
@@ -117,7 +118,7 @@ const ValentinePage = () => {
     28: { text: "Roses and chocolates?" },
     29: { text: "Well you should." },
     30: { text: "Pick a color." },
-    31: { text: "Red. Perfect.", buttonState: 'colors' },
+    31: { text: "Red. Perfect." },
     32: { text: "Click the red heart.", buttonState: 'colors' },
     33: { text: "Click the pink heart.", buttonState: 'colors' },
     34: { text: "See, you just can't trust me.\nOr can you?", buttonState: 'default' },
@@ -313,6 +314,22 @@ const ValentinePage = () => {
     }
   };
 
+  const handleRedHeartClick = () => {
+    if (clickCount === 33) {
+      // Asked for pink, got red
+      setColorMismatchQuip("Close enough. Red has pink energy.");
+    }
+    handleYesClick();
+  };
+
+  const handlePinkHeartClick = () => {
+    if (clickCount === 32) {
+      // Asked for red, got pink
+      setColorMismatchQuip("Well, pink is technically a shade of red... I'll allow it.");
+    }
+    handleYesClick();
+  };
+
   // Separate handler for just moving the button (doesn't advance message)
   const handleNoButtonMove = () => {
     if (buttonState === 'moving-no') {
@@ -358,7 +375,7 @@ const ValentinePage = () => {
             Finally.
           </h1>
           <p className="font-cormorant text-2xl md:text-3xl text-gray-600">
-            Took you long enough. 💕
+            {colorMismatchQuip || "Took you long enough. 💕"}
           </p>
           <p className="font-cormorant text-lg text-gray-500 mt-4 whitespace-pre-line">
             {clickCount < 5
@@ -498,14 +515,14 @@ const ValentinePage = () => {
       case 'colors':
         return (
           <div className="flex gap-8 items-center">
-            <button onClick={handleYesClick} className="p-4">
+            <button onClick={handleRedHeartClick} className="p-4 hover:scale-110 transition-transform">
               <Heart className="text-red-500 fill-red-500" size={80} />
             </button>
-            <button onClick={handleYesClick} className="p-4">
+            <button onClick={handlePinkHeartClick} className="p-4 hover:scale-110 transition-transform">
               <Heart className="text-pink-500 fill-pink-500" size={80} />
             </button>
-            <button onClick={handleNoClick} className={`${baseNoClasses} bg-gray-400 hover:bg-gray-500 px-6 py-3 text-lg`}>
-              No thanks
+            <button onClick={handleNoClick} className="p-4 hover:scale-110 transition-transform">
+              <Heart className="text-gray-400 fill-gray-400" size={80} />
             </button>
           </div>
         );
