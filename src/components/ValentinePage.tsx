@@ -350,6 +350,10 @@ const ValentinePage = () => {
           <p className="font-cormorant text-lg text-gray-500 mt-4">
             {clickCount < 5
               ? `(${clickCount} ${clickCount === 1 ? 'click' : 'clicks'}? Desperate much? 😏)`
+              : clickCount >= 209
+              ? "Achievement unlocked: World's Most Stubborn Valentine 🏆. You're impossible. Good thing I already locked this down. 💍"
+              : clickCount >= 200
+              ? "Okay fine, you earned this: 💍 (It's the same ring. I'm not made of money.)"
               : `(${clickCount} clicks. Could've been worse.)`}
           </p>
         </div>
