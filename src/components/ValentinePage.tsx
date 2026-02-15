@@ -137,7 +137,7 @@ const ValentinePage = () => {
     47: { text: "BOOM!\n💔", buttonState: 'default' },
     48: { text: "That wasn't very nice now was it?" },
     49: { text: "You broke my heart. Everyone's heart." },
-    50: { text: "I'm not. I'm just text." },
+    50: { text: "Not mine. I'm just text." },
     51: { text: "But you broke my heart." },
     52: { text: "Ha! Heart-breaker!" },
     53: { text: "Stop clicking No." },
